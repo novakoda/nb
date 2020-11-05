@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in?  %>
+  <section class="">
+    <textarea name="post" rows="1" class="form-control"></textarea>
+    <button class="btn btn-primary" type="button" name="button">Post</button>
+  </section>
+<% end %>
 
 <h1>Posts</h1>
 
