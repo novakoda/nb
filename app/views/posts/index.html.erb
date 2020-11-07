@@ -1,12 +1,9 @@
 <% if user_signed_in?  %>
-  <section class="">
-    <textarea name="post" rows="1" class="form-control"></textarea>
-    <button class="btn btn-primary" type="button" name="button">Post</button>
-  </section>
+  <%= render partial: "posts/form" %>
 <% end %>
 
 <h1>Posts</h1>
-
+<%= render partial: "posts/feed" %>
 <table>
   <thead>
     <tr>
@@ -17,15 +14,7 @@
   </thead>
 
   <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.body %></td>
-        <td><%= post.user_id %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+
   </tbody>
 </table>
 
