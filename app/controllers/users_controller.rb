@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
+    @posts = Post.where(user: @user)
+    @post = current_user.posts.new if @user == current_user
   end
 
   # GET /users/new

@@ -7,6 +7,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
+        <li class="nav-item active">
+          <%= link_to current_user.full_name, user_path(current_user), class: "nav-link" %>
+        </li>
         <li class="nav-item">
           <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
