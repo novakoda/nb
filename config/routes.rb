@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "posts#index"
+  root 'posts#index', as: 'home'
+
+  get 'users/:requested_id/friend_request', to: 'users#friend_request', as: 'request'
 
   get 'users/:id', to: 'users#show', as: 'user'
   post 'users', to: 'devise/registrations#create', as: 'new_user'

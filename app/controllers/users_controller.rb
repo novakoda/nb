@@ -24,6 +24,19 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def friend_request
+    user = User.find(params[:requested_id])
+    unless current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == params[:requested_id].to_i }
+      fr = current_user.out_friend_requests.new
+      fr.requested = user
+      fr.save
+      flash[:alert] = 'Friend request sent!'
+    else
+      flash[:alert] = "You already sent #{user.full_name} a friend request!"
+    end
+    redirect_to home_path
+  end
+
   # POST /users
   # POST /users.json
   def create

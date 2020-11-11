@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @user.full_name %>
-</p>
+</h1>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
+
+<% unless current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == @user.id.to_i } %>
+  <%= link_to 'Add as Friend', request_path(@user) %>
+<% else %>
+  <p>Friend Request Pending</p>
+<% end %>
 
 <% if user_signed_in? && current_user == @user  %>
   <%= render partial: "posts/form" %>
