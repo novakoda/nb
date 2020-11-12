@@ -1,0 +1,10 @@
+<% if friend_request.requested_id == current_user.id %>
+  <p>
+    <%= link_to friend_request.requester.full_name,  user_path(friend_request.requester_id) %>
+    <%= link_to "Accept",  friendship_path(friend_request.id) %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to friend_request.requested.full_name,  user_path(friend_request.requested_id) %> Pending...
+  </p>
+<% end %>

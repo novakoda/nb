@@ -24,19 +24,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def friend_request
-    user = User.find(params[:requested_id])
-    unless current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == params[:requested_id].to_i }
-      fr = current_user.out_friend_requests.new
-      fr.requested = user
-      fr.save
-      flash[:alert] = 'Friend request sent!'
-    else
-      flash[:alert] = "You already sent #{user.full_name} a friend request!"
-    end
-    redirect_to home_path
-  end
-
   # POST /users
   # POST /users.json
   def create
@@ -77,6 +64,36 @@ class UsersController < ApplicationController
     end
   end
 
+  def friend_request
+    user = User.find(params[:requested_id])
+    unless current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == params[:requested_id].to_i }
+      fr = current_user.out_friend_requests.new
+      fr.requested = user
+      fr.save
+      flash[:alert] = 'Friend request sent!'
+    else
+      flash[:alert] = "You already sent #{user.full_name} a friend request!"
+    end
+    redirect_to home_path
+  end
+
+  def befriend
+    fr = FriendRequest.find(params[:friendship_id])
+    if fr.requested == current_user && get_all_friends.none?(fr.requester)
+      friendship = current_user.friendships.new
+      friendship.one = current_user
+      friendship.two = fr.requester
+      friendship.save
+      fr.destroy
+    end
+    redirect_to home_path
+  end
+
+  def notifications
+    @sent_requests = current_user.out_friend_requests
+    @received_requests = current_user.in_friend_requests
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -86,5 +103,9 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email)
+    end
+
+    def get_all_friends
+      current_user.friendships.map{ |f| f.two }
     end
 end

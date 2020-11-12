@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   root 'posts#index', as: 'home'
 
   get 'users/:requested_id/friend_request', to: 'users#friend_request', as: 'request'
+  get 'notifications', to: 'users#notifications', as: 'notification'
+  get 'friendship/:friendship_id', to: 'users#befriend', as: 'friendship'
 
   get 'users/:id', to: 'users#show', as: 'user'
   post 'users', to: 'devise/registrations#create', as: 'new_user'
