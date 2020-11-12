@@ -9,15 +9,20 @@
   <%= @user.email %>
 </p>
 
-<% unless current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == @user.id.to_i } %>
+<% if current_user.friends.any?{|f| f == @user} %>
+  <p>Friends!</p>
+<% elsif !current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == @user.id.to_i } %>
   <%= link_to 'Add as Friend', request_path(@user) %>
 <% else %>
   <p>Friend Request Pending</p>
 <% end %>
 
+<h2>Friends</h2>
+<%= render partial: "users/friends" %>
+
 <% if user_signed_in? && current_user == @user  %>
   <%= render partial: "posts/form" %>
 <% end %>
 
-<h1>Posts</h1>
+<h2>Posts</h2>
 <%= render partial: "posts/feed" %>
