@@ -64,14 +64,22 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.find(params[:id])
-    unless current_user.likes.any?{ |l| l.post == @post }
-      like = @post.likes.new
-      like.user = current_user
-      like.save
+    unless current_user.liked_posts.include? @post
+      @post.likes << current_user.likes.build
       flash[:alert] = 'Post liked!'
     else
       flash[:alert] = 'You already liked that post!'
     end
+    redirect_back(fallback_location: home_path)
+  end
+
+  def unlike
+    @post = Post.find(params[:id])
+    @like = @post.likes.where(user_id: current_user.id, post_id: @post.id).first
+    if current_user.likes.include? @like
+      @like.destroy
+    end
+    flash[:alert] = 'Post unliked!'
     redirect_back(fallback_location: home_path)
   end
 

@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes
 
+  has_many :liked_posts, through: :likes, source: :post
+
   has_many :in_friend_requests, class_name: "FriendRequest", foreign_key: "requested_id", dependent: :destroy
   has_many :out_friend_requests, class_name: "FriendRequest", foreign_key: "requester_id", dependent: :destroy
 

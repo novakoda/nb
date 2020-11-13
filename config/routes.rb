@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'posts#index', as: 'home'
 
   post 'posts/:id/like', to: 'posts#like', as: 'like'
+  delete 'posts/:id/unlike', to: 'posts#unlike', as: 'unlike'
 
   get 'users/:requested_id/friend_request', to: 'users#friend_request', as: 'request'
   get 'notifications', to: 'users#notifications', as: 'notification'
