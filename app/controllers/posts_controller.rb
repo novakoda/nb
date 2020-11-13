@@ -64,9 +64,14 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.find(params[:id])
-    like = @post.likes.new
-    like.user = current_user
-    like.save
+    unless current_user.likes.any?{ |l| l.post == @post }
+      like = @post.likes.new
+      like.user = current_user
+      like.save
+      flash[:alert] = 'Post liked!'
+    else
+      flash[:alert] = 'You already liked that post!'
+    end
     redirect_back(fallback_location: home_path)
   end
 
