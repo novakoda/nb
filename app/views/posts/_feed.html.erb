@@ -4,12 +4,14 @@
     <div class="media-body">
       <h5 class="mt-0"><%= link_to post.user.full_name, user_path(post.user_id) %></h5>
       <%= post.body %>
-      <% if post.user == current_user %>
-        <p>
+      <p><%= post.likes.length %> Likes</p>
+      <p>
+        <%= link_to 'Like', like_path(post), method: :post %>
+        <% if post.user == current_user %>
           <%= link_to 'Edit', edit_post_path(post) %>
           <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </p>
-      <% end %>
+        <% end %>
+      </p>
     </div>
   </div>
 <% end %>
