@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = Post.where(user: @user)
     @post = current_user.posts.new if @user == current_user
+    @comment = Comment.new
   end
 
   # GET /users/new

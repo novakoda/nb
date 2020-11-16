@@ -1,21 +1,33 @@
 <% @posts.each do |post| %>
-  <div class="media">
+  <div class="media post-head">
     <img class="mr-3" src="..." alt="User Avatar">
     <div class="media-body">
       <h5 class="mt-0"><%= link_to post.user.full_name, user_path(post.user_id) %></h5>
-      <%= post.body %>
-      <p><%= post.likes.length %> Likes</p>
-      <p>
-        <% unless post.likes.any?{ |l| l.user == current_user } %>
-          <%= link_to 'Like', like_path(post), method: :post %>
-        <% else %>
-          <%= link_to 'Unlike', unlike_path(post), method: :delete %>
-        <% end %>
-        <% if post.user == current_user %>
-          <%= link_to 'Edit', edit_post_path(post) %>
-          <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
-      </p>
+      <p><%= time_ago_in_words(post.created_at) %> ago</p>
     </div>
+  </div>
+  <%= post.body %>
+  <p><%= post.likes.length %> Likes</p>
+  <p>
+    <% unless post.likes.any?{ |l| l.user == current_user } %>
+      <%= link_to 'Like', like_path(post), method: :post %>
+    <% else %>
+      <%= link_to 'Unlike', unlike_path(post), method: :delete %>
+    <% end %>
+    <% if post.user == current_user %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </p>
+  <div class="post-comments-container">
+    <p><%= post.comments.length %> Comments</p>
+    <%= render "comments/form", post_id: post.id %>
+    <% if post.comments.any? %>
+      <% post.comments.each do |comment| %>
+        <%= link_to comment.user.full_name, user_path(comment.user_id) %>
+        <%= comment.body %>
+        <p><%= time_ago_in_words(comment.created_at) %> ago</p>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
