@@ -19,15 +19,5 @@
       <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </p>
-  <div class="post-comments-container">
-    <p><%= post.comments.length %> Comments</p>
-    <%= render "comments/form", post_id: post.id %>
-    <% if post.comments.any? %>
-      <% post.comments.each do |comment| %>
-        <%= link_to comment.user.full_name, user_path(comment.user_id) %>
-        <%= comment.body %>
-        <p><%= time_ago_in_words(comment.created_at) %> ago</p>
-      <% end %>
-    <% end %>
-  </div>
+  <%= render "comments/list", post: post %>
 <% end %>
