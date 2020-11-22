@@ -275,6 +275,15 @@ Devise.setup do |config|
   Rails.application.credentials.dig(:facebook, :facebook_client_secret),
   scope: 'public_profile,email', info_fields: 'email,first_name,last_name', token_params: { parse: :json }
 
+  config.omniauth :github, Rails.application.credentials.dig(:github, :github_client_id),
+  Rails.application.credentials.dig(:github, :github_client_secret),
+  scope: 'repo,user'
+
+  config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :google_client_id),
+  Rails.application.credentials.dig(:google, :google_client_secret),
+  scope: 'userinfo.email,userinfo.profile'
+
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
