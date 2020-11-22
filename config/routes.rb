@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   resources :posts
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'omniauth'
   }
+
+  get '/auth/:provider/callback', to: 'devise/sessions#create'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'posts#index', as: 'home'
 

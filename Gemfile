@@ -35,6 +35,7 @@ gem 'simple_form', '~> 5.0', '>= 5.0.3'
 
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
 gem 'omniauth-facebook', '~> 8.0'
+gem 'activerecord-session_store', '~> 1.1', '>= 1.1.3'
 
 
 group :development, :test do
