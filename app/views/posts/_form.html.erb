@@ -1,8 +1,7 @@
-
+<%= image_tag(current_user.avatar_thumbnail) %>
 <%= simple_form_for(@post) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
 
   <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind?" %>
   <%= f.button :submit, class: "btn btn-primary btn-block" %>

@@ -20,6 +20,8 @@ class User < ApplicationRecord
   has_many :friends_a, through: :friendships_a, source: 'two'
   has_many :friends_b, through: :friendships_b, source: 'one'
 
+  has_one_attached :avatar
+
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
       user.email = provider_data.info.email
@@ -46,5 +48,13 @@ class User < ApplicationRecord
 
   def friends
     friends_a + friends_b
+  end
+
+  def avatar_thumbnail
+    if avatar.attached?
+      avatar.variant(resize: "150x150!").processed
+    else
+      '/default_profile.jpg'
+    end
   end
 end
