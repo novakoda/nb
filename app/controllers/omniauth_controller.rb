@@ -1,5 +1,6 @@
 class OmniauthController < Devise::OmniauthCallbacksController
   def facebook
+    # raise request.env['omniauth.auth'].to_yaml
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in_and_redirect @user

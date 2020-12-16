@@ -3,12 +3,57 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .posts-container {
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 750px;
+  margin: 0 auto 10px auto;
+  background-color: rgb(27, 27, 27);
+  padding: 0 20px 20px 20px;
+  border-radius: 5px;
+  color: #eee;
 }
 
 .post-head {
+  margin: 20px -20px 10px -20px;
   background-color: #eee;
-  border: 1px solid #ddd;
+  border-top: 15px solid #rgb(15,15,15);
+  border-radius: 5px;
+  padding: 10px 0 0 10px;
+  color: #555;
+}
+
+.post-avatar {
+  height: 64px;
+  width: 64px;
+  margin: 0 5px 5px 0;
+}
+
+.post-btns-container {
+  display: flex;
+  width: 100%;
+}
+
+.post-btn {
+  display: flex;
+  margin-right: 10px;
+  background-color: #666;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100px;
+  color: #360b99;
+}
+
+.post-btn-pic {
+  font-size: 20px;
+  display: inline;
+}
+
+.post-form-container {
+  display: flex;
   padding-top: 10px;
+  margin-left: -10px;
+}
+
+.post-form {
+  width: 100%;
 }

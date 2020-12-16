@@ -1,17 +1,26 @@
 <div class="post-comments-container">
-  <p><%= post.comments.length %> Comments</p>
+  <p><%= post.comments.length %> <%= post.comments.length == 1 ? 'Comment' : 'Comments'  %></p>
   <% if user_signed_in? %>
     <%= render "comments/form", post_id: post.id %>
   <% end %>
   <% if post.comments.any? %>
     <% post.comments.each do |comment| %>
-      <h5><%= link_to comment.user.full_name, user_path(comment.user_id) %></h5>
-      <p><%= comment.body %></p>
-      <p><%= time_ago_in_words(comment.created_at) %> ago</p>
-      <% if comment.user == current_user %>
-        <%= link_to 'Edit', edit_comment_path(comment) %>
-        <%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
+      <div class="comment-container">
+        <h5 class="commenter"><%= link_to comment.user.full_name, user_path(comment.user_id) %></h5>
+        <p><%= comment.body %></p>
+        <p class="time-ago"><%= time_ago_in_words(comment.created_at) %> ago</p>
+
+        <div class="post-btns-container">
+          <% if comment.user == current_user %>
+            <%= button_to(edit_comment_path(comment), class: "post-btn") do %>
+              <i class="fas fa-edit post-btn-pic"></i>Edit
+            <% end %>
+            <%= button_to(comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-btn") do %>
+              <i class="fas fa-trash-alt post-btn-pic"></i>Delete
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   <% end %>
 </div>

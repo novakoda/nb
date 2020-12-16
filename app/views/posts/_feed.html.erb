@@ -1,23 +1,37 @@
 <% @posts.each do |post| %>
-  <div class="media post-head">
-    <%= image_tag(post.user.avatar_thumbnail)  %>
-    <div class="media-body">
-      <h5 class="mt-0"><%= link_to post.user.full_name, user_path(post.user_id) %></h5>
-      <p><%= time_ago_in_words(post.created_at) %> ago</p>
+  <div class="posts-container">
+    <div class="media post-head">
+      <% if post.user.avatar.attached? %>
+        <%= image_tag(post.user.avatar_thumbnail, class: "post-avatar")  %>
+      <% end %>
+      <div class="media-body">
+        <h5 class="mt-0"><%= link_to post.user.full_name, user_path(post.user_id) %></h5>
+        <p><%= time_ago_in_words(post.created_at) %> ago</p>
+      </div>
     </div>
+    <%= post.body %>
+    <p><%= post.likes.length %> <%= post.likes.length == 1 ? 'Like' : 'Likes'  %></p>
+
+    <div class="post-btns-container">
+      <% unless post.likes.any?{ |l| l.user == current_user } %>
+        <%= button_to(like_path(post), method: :post, class: "post-btn") do %>
+          <i class="far fa-heart post-btn-pic"></i>Like
+        <% end %>
+      <% else %>
+        <%= button_to(unlike_path(post), method: :delete, class: "post-btn") do %>
+          <i class="fas fa-heart post-btn-pic"></i>Unlike
+        <% end %>
+      <% end %>
+
+      <% if post.user == current_user %>
+        <%= button_to(edit_post_path(post), class: "post-btn") do %>
+          <i class="fas fa-edit post-btn-pic"></i>Edit
+        <% end %>
+        <%= button_to(post, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-btn") do %>
+          <i class="fas fa-trash-alt post-btn-pic"></i>Delete
+        <% end %>
+      <% end %>
+    </div>
+    <%= render "comments/list", post: post %>
   </div>
-  <%= post.body %>
-  <p><%= post.likes.length %> Likes</p>
-  <p>
-    <% unless post.likes.any?{ |l| l.user == current_user } %>
-      <%= link_to 'Like', like_path(post), method: :post %>
-    <% else %>
-      <%= link_to 'Unlike', unlike_path(post), method: :delete %>
-    <% end %>
-    <% if post.user == current_user %>
-      <%= link_to 'Edit', edit_post_path(post) %>
-      <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
-  </p>
-  <%= render "comments/list", post: post %>
 <% end %>

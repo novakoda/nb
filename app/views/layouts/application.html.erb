@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/d1d43a8f7d.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -14,14 +15,12 @@
   <script>
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '{your-app-id}',
+        appId      : '{980602009131644}',
         cookie     : true,
         xfbml      : true,
-        version    : '{api-version}'
+        version    : '{9.0}'
       });
-
       FB.AppEvents.logPageView();
-
     };
 
     (function(d, s, id){

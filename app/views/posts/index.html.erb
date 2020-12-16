@@ -1,8 +1,7 @@
 <div class="posts-container">
-  <h1>Posts</h1>
   <% if user_signed_in?  %>
     <%= render partial: "posts/form" %>
   <% end %>
-
-  <%= render partial: "posts/feed" %>
 </div>
+
+<%= render partial: "posts/feed" %>

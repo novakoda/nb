@@ -14,8 +14,23 @@
  *= require_self
  */
 
+@import "colors";
 @import "bootstrap";
+
+body {
+  background-color: rgb(15, 15, 15);
+}
 
 .white-text {
   color: white !important;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar + .container-fluid {
+  padding-top: 30px;
 }
