@@ -1,30 +1,33 @@
 <p id="notice"><%= notice %></p>
+<div class="profile-container">
+  <%= image_tag(@user.avatar.variant(resize: "350x350!").processed, class: "profile-pic") if @user.avatar.attached? %>
+  <div class="">
+    <h1>
+      <%= @user.full_name %>
+    </h1>
 
-<%= image_tag(@user.avatar) if @user.avatar.attached? %>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-<h1>
-  <%= @user.full_name %>
-</h1>
+    <% if current_user.friends.any?{|f| f == @user} %>
+      <%= link_to 'Unfriend', unfriend_path(@user), method: :delete %>
+    <% elsif !current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == @user.id.to_i } && current_user != @user %>
+      <%= link_to 'Add as Friend', request_path(@user) %>
+    <% elsif current_user != @user %>
+      <p>Friend Request Pending</p>
+    <% end %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<% if current_user.friends.any?{|f| f == @user} %>
-  <p>Friends!</p>
-<% elsif !current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == @user.id.to_i } %>
-  <%= link_to 'Add as Friend', request_path(@user) %>
-<% else %>
-  <p>Friend Request Pending</p>
-<% end %>
-
-<h2>Friends</h2>
-<%= render partial: "users/friends" %>
-
-<% if user_signed_in? && current_user == @user  %>
-  <%= render partial: "posts/form" %>
-<% end %>
+    <h2>Friends</h2>
+    <%= render partial: "users/friends" %>
+  </div>
+</div>
 
 <h2>Posts</h2>
+<% if user_signed_in? && current_user == @user  %>
+  <div class="posts-container">
+    <%= render partial: "posts/form" %>
+  </div>
+<% end %>
 <%= render partial: "posts/feed" %>

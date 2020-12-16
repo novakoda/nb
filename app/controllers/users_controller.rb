@@ -81,12 +81,20 @@ class UsersController < ApplicationController
   def befriend
     fr = FriendRequest.find(params[:friendship_id])
     if fr.requested == current_user && get_all_friends.none?(fr.requester)
-      friendship = current_user.friendships.new
+      friendship = current_user.friendships_a.new
       friendship.one = current_user
       friendship.two = fr.requester
       friendship.save
       fr.destroy
     end
+    redirect_to home_path
+  end
+
+  def unfriend
+    friendship = Friendship.where(one_id: params[:friendship_id], two_id: current_user.id).or(
+      Friendship.where(one_id: current_user.id, two_id: params[:friendship_id])
+    ).first
+    friendship.destroy
     redirect_to home_path
   end
 

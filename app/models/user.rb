@@ -50,6 +50,10 @@ class User < ApplicationRecord
     first_name + " " + last_name
   end
 
+  def friendships
+    friendships_a + friendships_b
+  end
+
   def friends
     friends_a + friends_b
   end
