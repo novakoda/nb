@@ -22,4 +22,5 @@ Rails.application.routes.draw do
 
   get 'users/:id', to: 'users#show', as: 'user'
   post 'users', to: 'devise/registrations#create', as: 'new_user'
+  delete 'remove_avatar', to: 'avatars#remove_avatar', as: 'remove_avatar'
 end

@@ -1,14 +1,16 @@
-<h1>Friend Requests</h1>
-<h2>Received</h2>
-<% unless @received_requests.nil? %>
-  <%= render @received_requests %>
-<% else %>
-  <p>Empty</p>
-<% end %>
-<br>
-<h2>Pending</h2>
-<% unless @sent_requests.nil? %>
-  <%= render @sent_requests %>
-<% else %>
-  <p>Empty</p>
-<% end %>
+<div class="form-container mx-auto">
+  <h1>Friend Requests</h1>
+  <h2>Received</h2>
+  <% unless @received_requests.nil? %>
+    <%= render @received_requests %>
+  <% else %>
+    <p>Empty</p>
+  <% end %>
+  <br>
+  <h2>Pending</h2>
+  <% unless @sent_requests.nil? %>
+    <%= render @sent_requests %>
+  <% else %>
+    <p>Empty</p>
+  <% end %>  
+</div>

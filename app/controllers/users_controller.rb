@@ -66,41 +66,45 @@ class UsersController < ApplicationController
   end
 
   def friend_request
-    user = User.find(params[:requested_id])
+    @user = User.find(params[:requested_id])
     unless current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == params[:requested_id].to_i }
-      fr = current_user.out_friend_requests.new
-      fr.requested = user
-      fr.save
+      @fr = current_user.out_friend_requests.new
+      @fr.requested = @user
+      @fr.save
       flash[:alert] = 'Friend request sent!'
     else
-      flash[:alert] = "You already sent #{user.full_name} a friend request!"
+      flash[:alert] = "You already sent #{@user.full_name} a friend request!"
     end
     redirect_to home_path
   end
 
   def befriend
-    fr = FriendRequest.find(params[:friendship_id])
-    if fr.requested == current_user && get_all_friends.none?(fr.requester)
-      friendship = current_user.friendships_a.new
-      friendship.one = current_user
-      friendship.two = fr.requester
-      friendship.save
-      fr.destroy
+    @fr = FriendRequest.find(params[:friendship_id])
+    if @fr.requested == current_user && get_all_friends.none?(@fr.requester)
+      @friendship = current_user.friendships_a.new
+      @friendship.one = current_user
+      @friendship.two = @fr.requester
+      @friendship.save
+      @fr.destroy
     end
     redirect_to home_path
   end
 
   def unfriend
-    friendship = Friendship.where(one_id: params[:friendship_id], two_id: current_user.id).or(
+    Friendship.where(one_id: params[:friendship_id], two_id: current_user.id).or(
       Friendship.where(one_id: current_user.id, two_id: params[:friendship_id])
-    ).first
-    friendship.destroy
+    ).first.destroy
     redirect_to home_path
   end
 
   def notifications
     @sent_requests = current_user.out_friend_requests
     @received_requests = current_user.in_friend_requests
+  end
+
+  def remove_avatar
+    current_user.avatar.purge
+    redirect_back(fallback_location: home_path)
   end
 
   private

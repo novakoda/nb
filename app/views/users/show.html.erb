@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="profile-container">
   <%= image_tag(@user.avatar.variant(resize: "350x350!").processed, class: "profile-pic") if @user.avatar.attached? %>
-  <div class="">
+  <div class="profile-info">
     <h1>
       <%= @user.full_name %>
     </h1>
@@ -19,12 +19,11 @@
       <p>Friend Request Pending</p>
     <% end %>
 
-    <h2>Friends</h2>
+    <h2 class="friends-title">Friends</h2>
     <%= render partial: "users/friends" %>
   </div>
 </div>
 
-<h2>Posts</h2>
 <% if user_signed_in? && current_user == @user  %>
   <div class="posts-container">
     <%= render partial: "posts/form" %>

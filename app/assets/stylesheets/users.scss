@@ -1,10 +1,28 @@
 .profile-container {
   display: flex;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #666;
   color: #eee;
 }
 
 .profile-pic {
   margin-right: 20px;
+}
+
+.friend-avatar {
+  height: 25px;
+  width: 25px;
+  margin: 0 5px 5px 0;
+}
+
+.friends-title {
+  border-top: 2px solid #666;
+  padding-top: 5px;
+  font-size: 23px;
+}
+
+.form-container {
+  max-width: 550px;
 }
