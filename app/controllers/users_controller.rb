@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     else
       flash[:alert] = "You already sent #{@user.full_name} a friend request!"
     end
-    redirect_to home_path
+    redirect_back(fallback_location: home_path)
   end
 
   def befriend
@@ -87,7 +87,14 @@ class UsersController < ApplicationController
       @friendship.save
       @fr.destroy
     end
-    redirect_to home_path
+    redirect_back(fallback_location: home_path)
+  end
+
+  def decline_friendship
+    @fr = FriendRequest.find(params[:friendship_id])
+    @fr.declined = true
+    @fr.save
+    redirect_back(fallback_location: home_path)
   end
 
   def unfriend
@@ -99,7 +106,7 @@ class UsersController < ApplicationController
 
   def notifications
     @sent_requests = current_user.out_friend_requests
-    @received_requests = current_user.in_friend_requests
+    @received_requests = current_user.in_friend_requests.where(declined: false)
   end
 
   def remove_avatar

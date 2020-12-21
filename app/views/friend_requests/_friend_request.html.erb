@@ -1,12 +1,15 @@
-<p class="d-flex">
+<p class="d-inline-flex">
   <% if friend_request.requested_id == current_user.id %>
-    <%= image_tag(friend_request.requester.avatar_thumbnail, class: "friend-avatar") if friend_request.requester.avatar.attached? %>
-    <div>
-      <%= link_to friend_request.requester.full_name,  user_path(friend_request.requester_id) %>
-      <%= link_to "Accept",  friendship_path(friend_request.id) %>
-    </div>
+    <%= image_tag(friend_request.requester.avatar_thumbnail, class: "friend-avatar d-inline") if friend_request.requester.avatar.attached? %>
+    <%= link_to friend_request.requester.full_name,  user_path(friend_request.requester_id) %>
+    <%= link_to(friendship_path(friend_request.id), class: "btn btn-success btn-sm white-text") do %>
+      <i class="fas fa-check"></i>
+    <% end %>
+    <%= link_to(decline_friendship_path(friend_request.id), class: "btn btn-danger btn-sm white-text", method: :post) do %>
+      <i class="fas fa-times"></i>
+    <% end %>
   <% else %>
-      <%= image_tag(friend_request.requested.avatar_thumbnail, class: "friend-avatar") if friend_request.requested.avatar.attached? %>
-      <%= link_to friend_request.requested.full_name,  user_path(friend_request.requested_id) %> Pending...
+    <%= image_tag(friend_request.requested.avatar_thumbnail, class: "friend-avatar") if friend_request.requested.avatar.attached? %>
+    <%= link_to friend_request.requested.full_name,  user_path(friend_request.requested_id) %> Pending...
   <% end %>
 </p>

@@ -6,13 +6,12 @@
 
     <div class="form-inputs">
       <div class="d-flex">
-        <%= image_tag(resource.avatar_thumbnail) if resource.avatar.attached? %>
-
-        <label class="ml-3">Change Avatar<br/>
+        <%= image_tag(resource.avatar_thumbnail, class: "mr-3") if resource.avatar.attached? %>
+        <label>Change Avatar<br/>
           <%= f.file_field :avatar, class: 'mt-2' %>
         </label>
       </div>
-      <%= link_to('Remove Avatar', remove_avatar_path, method: :delete, class: "btn btn-danger my-3") if resource.avatar.attached? %>
+      <%= link_to('Remove Avatar', remove_avatar_path, method: :delete, class: "btn btn-danger my-3 white-text") if resource.avatar.attached? %>
 
       <%= f.input :email, required: true, autofocus: true %>
 

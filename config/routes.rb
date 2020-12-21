@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'notifications', to: 'users#notifications', as: 'notification'
   get 'friendship/:friendship_id', to: 'users#befriend', as: 'friendship'
   delete 'friendship/:friendship_id', to: 'users#unfriend', as: 'unfriend'
+  post 'friendship/:friendship_id/decline', to: 'users#decline_friendship', as: 'decline_friendship'
 
   get 'users/:id', to: 'users#show', as: 'user'
   post 'users', to: 'devise/registrations#create', as: 'new_user'

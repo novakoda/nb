@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_001419) do
+ActiveRecord::Schema.define(version: 2020_12_20_220255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_001419) do
     t.bigint "requested_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "declined", default: false
     t.index ["requested_id"], name: "index_friend_requests_on_requested_id"
     t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
   end

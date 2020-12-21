@@ -12,14 +12,16 @@
     </p>
 
     <% if current_user.friends.any?{|f| f == @user} %>
-      <%= link_to 'Unfriend', unfriend_path(@user), method: :delete %>
+      <%= link_to 'Unfriend', unfriend_path(@user), method: :delete, class: "btn btn-danger white-text" %>
+    <% elsif current_user.in_friend_requests.any?{ |f| f.requester_id.to_i == @user.id.to_i } && current_user != @user %>
+      <%= link_to 'Accept Friend Request', friendship_path(current_user.in_friend_requests.find{|f| f.requester_id == @user.id.to_i}.id), class: "btn btn-success white-text" %>
     <% elsif !current_user.out_friend_requests.any?{ |f| f.requested_id.to_i == @user.id.to_i } && current_user != @user %>
-      <%= link_to 'Add as Friend', request_path(@user) %>
+      <%= link_to 'Add as Friend', request_path(@user), class: "btn btn-primary white-text" %>
     <% elsif current_user != @user %>
-      <p>Friend Request Pending</p>
+      <button type="button" class="btn btn-secondary white-text" disabled>Friend Request Pending</button>
     <% end %>
 
-    <h2 class="friends-title">Friends</h2>
+    <h2 class="friends-title mt-3">Friends</h2>
     <%= render partial: "users/friends" %>
   </div>
 </div>
