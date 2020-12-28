@@ -10,6 +10,6 @@
     <% end %>
   <% else %>
     <%= image_tag(friend_request.requested.avatar_thumbnail, class: "friend-avatar") if friend_request.requested.avatar.attached? %>
-    <%= link_to friend_request.requested.full_name,  user_path(friend_request.requested_id) %> Pending...
+    <%= link_to friend_request.requested.full_name,  user_path(friend_request.requested_id), class: 'mr-3' %>
   <% end %>
 </p>

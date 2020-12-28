@@ -14,24 +14,25 @@
 
     <div class="post-btns-container">
       <% unless post.likes.any?{ |l| l.user == current_user } %>
-        <%= button_to(like_path(post), method: :post, class: "post-btn") do %>
-          <i class="far fa-heart post-btn-pic"></i>Like
+        <%= button_to(like_path(post), method: :post, class: "btn btn-primary btn-sm mr-1") do %>
+          <i class="far fa-heart post-btn-pic mr-2"></i>Like
         <% end %>
       <% else %>
-        <%= button_to(unlike_path(post), method: :delete, class: "post-btn") do %>
-          <i class="fas fa-heart post-btn-pic"></i>Unlike
+        <%= button_to(unlike_path(post), method: :delete, class: "btn btn-primary btn-sm mr-1") do %>
+          <i class="fas fa-heart post-btn-pic mr-2"></i>Unlike
         <% end %>
       <% end %>
 
       <% if post.user == current_user %>
-        <%= button_to(edit_post_path(post), class: "post-btn") do %>
-          <i class="fas fa-edit post-btn-pic"></i>Edit
+        <%= button_to(edit_post_path(post), class: "btn btn-primary btn-sm mr-1") do %>
+          <i class="fas fa-edit post-btn-pic mr-2"></i>Edit
         <% end %>
-        <%= button_to(post, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-btn") do %>
-          <i class="fas fa-trash-alt post-btn-pic"></i>Delete
+        <%= button_to(post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm mr-1") do %>
+          <i class="fas fa-trash-alt post-btn-pic mr-2"></i>Delete
         <% end %>
       <% end %>
     </div>
+    <p><%= post.comments.length %> <%= post.comments.length == 1 ? 'Comment' : 'Comments'  %></p>
     <%= render "comments/list", post: post %>
   </div>
 <% end %>

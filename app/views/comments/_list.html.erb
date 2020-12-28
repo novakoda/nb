@@ -1,5 +1,4 @@
 <div class="post-comments-container">
-  <p><%= post.comments.length %> <%= post.comments.length == 1 ? 'Comment' : 'Comments'  %></p>
   <% if user_signed_in? %>
     <%= render "comments/form", post_id: post.id %>
   <% end %>
