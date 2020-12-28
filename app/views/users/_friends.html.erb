@@ -1,6 +1,6 @@
 <% @user.friends.each do |f| %>
   <div class="d-flex">
-    <%= image_tag(f.avatar.variant(resize: "25x25!").processed, class: "friend-avatar")  if f.avatar.attached? %>
+    <%= image_tag(f.avatar.variant(resize: "25x25!").processed, class: "friend-avatar rounded")  if f.avatar.attached? %>
     <%= link_to f.full_name, user_path(f) %>
   </div>
 <% end %>

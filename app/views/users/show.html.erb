@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="profile-container">
-  <%= image_tag(@user.avatar.variant(resize: "350x350!").processed, class: "profile-pic") if @user.avatar.attached? %>
+  <%= image_tag(@user.avatar.variant(resize: "350x350!").processed, class: "profile-pic rounded") if @user.avatar.attached? %>
   <div class="profile-info">
     <h1>
       <%= @user.full_name %>

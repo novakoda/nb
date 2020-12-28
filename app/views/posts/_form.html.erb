@@ -1,5 +1,5 @@
 <div class="post-form-container">
-  <%= image_tag(current_user.avatar_thumbnail, class: "post-avatar") if current_user.avatar.attached? %>
+  <%= image_tag(current_user.avatar_thumbnail, class: "post-avatar rounded") if current_user.avatar.attached? %>
   <%= simple_form_for(@post, html: { class: "post-form" }) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>

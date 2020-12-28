@@ -2,7 +2,7 @@
   <div class="posts-container">
     <div class="media post-head">
       <% if post.user.avatar.attached? %>
-        <%= image_tag(post.user.avatar_thumbnail, class: "post-avatar")  %>
+        <%= image_tag(post.user.avatar_thumbnail, class: "post-avatar rounded")  %>
       <% end %>
       <div class="media-body">
         <h5 class="mt-0"><%= link_to post.user.full_name, user_path(post.user_id) %></h5>
@@ -32,7 +32,7 @@
         <% end %>
       <% end %>
     </div>
-    <p><%= post.comments.length %> <%= post.comments.length == 1 ? 'Comment' : 'Comments'  %></p>
+    <a><%= post.comments.length %> <%= post.comments.length == 1 ? 'Comment' : 'Comments'  %></a>
     <%= render "comments/list", post: post %>
   </div>
 <% end %>
