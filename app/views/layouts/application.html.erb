@@ -34,8 +34,16 @@
     <%= render partial: "shared/navbar" %>
 
     <div class="container-fluid">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if flash[:notice] %>
+        <div class="alert alert-success fade show" role="notice">
+          <%= notice %>
+        </div>
+    	<% end %>
+    	<% if flash[:alert] %>
+        <div class="alert alert-danger fade show" role="alert">
+          <%= alert %>
+        </div>
+    	<% end %>
       <%= yield %>
 
     </div>
