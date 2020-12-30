@@ -11,10 +11,7 @@
 
         <div class="post-btns-container">
           <% if comment.user == current_user %>
-            <%= button_to(edit_comment_path(comment), class: "post-btn") do %>
-              <i class="fas fa-edit post-btn-pic"></i>Edit
-            <% end %>
-            <%= button_to(comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-btn") do %>
+            <%= button_to(comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm mr-1") do %>
               <i class="fas fa-trash-alt post-btn-pic"></i>Delete
             <% end %>
           <% end %>
