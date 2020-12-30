@@ -58,10 +58,6 @@ class User < ApplicationRecord
     friends_a + friends_b
   end
 
-  def avatar_thumbnail
-    avatar.variant(resize: "150x150!").processed if avatar.attached?
-  end
-
   private
 
   # def add_default_avatar

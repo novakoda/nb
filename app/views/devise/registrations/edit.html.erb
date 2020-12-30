@@ -6,7 +6,7 @@
 
     <div class="form-inputs">
       <div class="d-flex">
-        <%= image_tag(resource.avatar_thumbnail, class: "mr-3") if resource.avatar.attached? %>
+        <%= image_tag(resource.avatar, class: "edit-avatar mr-3") if resource.avatar.attached? %>
         <label>Change Avatar<br/>
           <%= f.file_field :avatar, class: 'mt-2' %>
         </label>

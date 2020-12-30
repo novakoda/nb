@@ -9,12 +9,19 @@
 
 .profile-pic {
   margin-right: 20px;
+  max-width: 350px;
+  max-height: 350px;
 }
 
 .friend-avatar {
   height: 25px;
   width: 25px;
   margin: 0 5px 5px 0;
+}
+
+.edit-avatar {
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .friends-title {
@@ -25,8 +32,4 @@
 
 .form-container {
   max-width: 550px;
-}
-
-.x-btn {
-  padding: 200px 0
 }

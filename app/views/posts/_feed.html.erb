@@ -1,7 +1,7 @@
 <% @posts.each do |post| %>
   <div class="posts-container">
     <div class="media post-head">
-      <%= image_tag(post.user.avatar_thumbnail, class: "post-avatar rounded") if post.user.avatar.attached? %>
+      <%= image_tag(post.user.avatar, class: "post-avatar rounded") if post.user.avatar.attached? %>
       <div class="media-body">
         <h5 class="mt-0"><%= link_to post.user.full_name, user_path(post.user_id) %></h5>
         <p><%= time_ago_in_words(post.created_at) %> ago</p>
