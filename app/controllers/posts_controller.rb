@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_back fallback_location: home_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_back fallback_location: home_path, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     unless current_user.liked_posts.include? @post
       @post.likes << current_user.likes.build
-      flash[:alert] = 'Post liked!'
+      flash[:notice] = 'Post liked!'
     else
       flash[:alert] = 'You already liked that post!'
     end
@@ -80,7 +80,7 @@ class PostsController < ApplicationController
     if current_user.likes.include? @like
       @like.destroy
     end
-    flash[:alert] = 'Post unliked!'
+    flash[:notice] = 'Post unliked!'
     redirect_back(fallback_location: home_path)
   end
 
