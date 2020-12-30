@@ -13,7 +13,15 @@
       </div>
       <%= link_to('Remove Avatar', remove_avatar_path, method: :delete, class: "btn btn-danger my-3 white-text") if resource.avatar.attached? %>
 
-      <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :first_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "first_name" }%>
+      <%= f.input :last_name,
+                  required: true,
+                  input_html: { autocomplete: "last_name" }%>
+                  
+      <%= f.input :email, required: true %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>

@@ -22,7 +22,7 @@
       <% end %>
 
       <% if post.user == current_user %>
-        <%= button_to(edit_post_path(post), class: "btn btn-primary btn-sm mr-1") do %>
+        <%= button_to(edit_post_path(post), method: :get, class: "btn btn-primary btn-sm mr-1") do %>
           <i class="fas fa-edit post-btn-pic mr-2"></i>Edit
         <% end %>
         <%= button_to(post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm mr-1") do %>

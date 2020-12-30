@@ -6,11 +6,6 @@
       <%= @user.full_name %>
     </h1>
 
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-
     <% if current_user.friends.any?{|f| f == @user} %>
       <%= link_to 'Unfriend', unfriend_path(@user), method: :delete, class: "btn btn-danger white-text" %>
     <% elsif current_user.in_friend_requests.any?{ |f| f.requester_id.to_i == @user.id.to_i } && current_user != @user %>
