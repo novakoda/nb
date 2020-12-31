@@ -1,24 +1,13 @@
-# README
+# Novabook
+A facebook based project where users may create an account, add friends, make posts, leave comments on and like posts.
+Created as part of [the Odin Project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project) using Ruby on Rails, SASS, and Bootstrap.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### [Live Demo](https://novabook.herokuapp.com/)
+![user profile](/pics/profile.png?raw=true)
+![user profile](/pics/feed.png?raw=true)
+![user profile](/pics/notifications.png?raw=true)
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Databse Chart
+![database chart](/pics/database.png?raw=true)
