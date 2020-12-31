@@ -1,4 +1,4 @@
-<p class="d-inline-flex">
+<p class="d-inline-flex mr-3">
   <% if friend_request.requested_id == current_user.id %>
     <%= image_tag(friend_request.requester.avatar, class: "friend-avatar d-inline rounded") if friend_request.requester.avatar.attached? %>
     <%= link_to friend_request.requester.full_name,  user_path(friend_request.requester_id) %>

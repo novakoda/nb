@@ -4,7 +4,7 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind?" %>
+    <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind, #{current_user.first_name}?" %>
     <%= f.button :submit, class: "btn btn-primary btn-block" %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   <% end %>
